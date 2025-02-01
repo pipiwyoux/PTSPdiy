@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -102,7 +102,7 @@ const PrintReportPage = () => {
       document.body.innerHTML = printContent.outerHTML;
       window.print();
       document.body.innerHTML = originalContent;
-      navigate("/");
+      navigate("/admin");
     }
   }, [hasPrinted, navigate, isPrinting]);
 

@@ -95,7 +95,7 @@ const AdminOutgoingMail = () => {
           if (iframeDocument) {
             iframeDocument.body.innerHTML = '';
           }
-          navigate("/");
+          navigate("/admin");
         });
       }
     }
