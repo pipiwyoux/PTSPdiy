@@ -3,6 +3,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { OutgoingMail } from "@/types/admin";
@@ -58,12 +59,15 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-center text-lg font-bold">
+            Cetak Laporan Surat Keluar
+          </DialogTitle>
+          <DialogDescription className="text-center text-sm">
+            Silakan atur filter dan urutan laporan sebelum mencetak
+          </DialogDescription>
+        </DialogHeader>
         <div className="space-y-4">
-          <DialogHeader>
-            <DialogTitle className="text-center text-lg font-bold">
-              Cetak Laporan Surat Keluar
-            </DialogTitle>
-          </DialogHeader>
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm text-muted-foreground">Dari Tanggal</label>
