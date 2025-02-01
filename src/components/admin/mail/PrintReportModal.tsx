@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { OutgoingMail } from "@/types/admin";
 import PrintReportPreview from "./PrintReportPreview";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { format } from "date-fns";
 import {
   Select,
@@ -27,15 +27,16 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handlePrint = () => {
     const printContent = document.querySelector('.print-container');
-    if (printContent) {
-      const printWindow = window.open('', '_blank');
-      if (printWindow) {
-        printWindow.document.body.innerHTML = printContent.outerHTML;
-        printWindow.print();
-        printWindow.close();
+    if (printContent && iframeRef.current) {
+      const iframe = iframeRef.current;
+      const iframeDocument = iframe.contentDocument;
+      if (iframeDocument) {
+        iframeDocument.body.innerHTML = printContent.outerHTML;
+        iframe.contentWindow?.print();
       }
     }
   };
@@ -102,6 +103,11 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
             <PrintReportPreview entries={filteredEntries} />
           </div>
         </div>
+        <iframe
+          ref={iframeRef}
+          style={{ display: 'none' }}
+          title="Print Preview"
+        />
       </DialogContent>
     </Dialog>
   );
