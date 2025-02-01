@@ -30,13 +30,13 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
 
   const handlePrint = () => {
     const printContent = document.querySelector('.print-container');
-    const originalContent = document.body.innerHTML;
-    
     if (printContent) {
-      document.body.innerHTML = printContent.outerHTML;
-      window.print();
-      document.body.innerHTML = originalContent;
-      // window.location.reload(); // Removed reload to restore React functionality
+      const printWindow = window.open('', '_blank');
+      if (printWindow) {
+        printWindow.document.body.innerHTML = printContent.outerHTML;
+        printWindow.print();
+        printWindow.close();
+      }
     }
   };
 
