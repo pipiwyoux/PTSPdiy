@@ -56,9 +56,8 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
           if (iframeDocument) {
             iframeDocument.body.innerHTML = '';
           }
-          setTimeout(() => {
-            navigate("/admin");
-          }, 100);
+          const timestamp = new Date().getTime();
+          navigate(`/admin?t=${timestamp}`);
         });
       }
     }
