@@ -37,7 +37,20 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
       const iframeDocument = iframe.contentDocument;
       if (iframeDocument) {
         iframeDocument.body.innerHTML = printContent.outerHTML;
-        iframe.contentWindow?.print();
+        
+        // Use a promise to ensure the iframe content is loaded before printing
+        new Promise<void>((resolve) => {
+          iframe.onload = () => {
+            iframe.contentWindow?.print();
+            resolve();
+          };
+          iframe.contentWindow?.print();
+        }).then(() => {
+          // Reset the iframe content after printing
+          if (iframeDocument) {
+            iframeDocument.body.innerHTML = '';
+          }
+        });
       }
     }
   };
