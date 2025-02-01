@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/components/ui/use-toast";
 import { format } from "date-fns";
@@ -8,21 +8,30 @@ import { ServiceRequest } from "@/types/admin";
 import SearchFilter from "./filters/SearchFilter";
 import DateFilter from "./filters/DateFilter";
 import ServiceRequestsTable from "./service-requests/ServiceRequestsTable";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const AdminServiceRequests = () => {
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date>();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 50;
   const { toast } = useToast();
 
   const { data: requests, refetch } = useQuery({
-    queryKey: ["serviceRequests"],
+    queryKey: ["serviceRequests", currentPage, itemsPerPage],
     queryFn: async () => {
-      const querySnapshot = await getDocs(collection(db, "serviceRequests"));
+      const q = query(
+        collection(db, "serviceRequests"),
+        orderBy("tanggal", "desc"),
+        limit(itemsPerPage)
+      );
+      const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       })) as ServiceRequest[];
-    }
+    },
+    keepPreviousData: true,
   });
 
   const updateStatus = async (requestId: string, newStatus: string) => {
@@ -100,6 +109,12 @@ const AdminServiceRequests = () => {
     return matchesSearch && matchesDate;
   });
 
+  const totalPages = Math.ceil((filteredRequests?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row gap-4">
@@ -118,6 +133,32 @@ const AdminServiceRequests = () => {
         onDelete={handleDelete}
         onEdit={handleEdit}
       />
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationPrevious
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            />
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    isActive={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
+            <PaginationNext
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            />
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

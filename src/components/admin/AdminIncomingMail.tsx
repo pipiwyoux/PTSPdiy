@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, updateDoc, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
@@ -12,23 +12,32 @@ import EditIncomingMailForm from "./mail/EditIncomingMailForm";
 import { IncomingMail } from "@/types/admin";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const AdminIncomingMail = () => {
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date>();
   const [showForm, setShowForm] = useState(false);
   const [editingEntry, setEditingEntry] = useState<IncomingMail | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 50;
   const { toast } = useToast();
 
   const { data: entries, refetch } = useQuery({
-    queryKey: ["incomingMail"],
+    queryKey: ["incomingMail", currentPage, itemsPerPage],
     queryFn: async () => {
-      const querySnapshot = await getDocs(collection(db, "incomingMail"));
+      const q = query(
+        collection(db, "incomingMail"),
+        orderBy("tanggalTerima", "desc"),
+        limit(itemsPerPage)
+      );
+      const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       })) as IncomingMail[];
-    }
+    },
+    keepPreviousData: true,
   });
 
   const handleDelete = async (entryId: string) => {
@@ -88,6 +97,12 @@ const AdminIncomingMail = () => {
     return matchesSearch && matchesDate;
   });
 
+  const totalPages = Math.ceil((filteredEntries?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -136,6 +151,32 @@ const AdminIncomingMail = () => {
         onPrint={handlePrint}
         onUpdatePIC={handleUpdatePIC}
       />
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationPrevious
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            />
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    isActive={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
+            <PaginationNext
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            />
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, query, orderBy, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import PrintReportPreview from "./mail/PrintReportPreview";
 import IframePrintContent from "./mail/IframePrintContent";
+import * as React from "react";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const AdminOutgoingMail = () => {
   const [search, setSearch] = useState("");
@@ -21,18 +23,26 @@ const AdminOutgoingMail = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingEntry, setEditingEntry] = useState<OutgoingMail | null>(null);
   const [printContent, setPrintContent] = useState<string>("");
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 50;
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const { toast } = useToast();
 
   const { data: entries, refetch } = useQuery({
-    queryKey: ["outgoingMail"],
+    queryKey: ["outgoingMail", currentPage, itemsPerPage],
     queryFn: async () => {
-      const querySnapshot = await getDocs(collection(db, "outgoingMail"));
+      const q = query(
+        collection(db, "outgoingMail"),
+        orderBy("tanggal", "desc"),
+        limit(itemsPerPage)
+      );
+      const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       })) as OutgoingMail[];
-    }
+    },
+    keepPreviousData: true,
   });
 
   const handleDelete = async (entryId: string) => {
@@ -95,6 +105,12 @@ const AdminOutgoingMail = () => {
     
     return matchesSearch && matchesDate;
   });
+
+  const totalPages = Math.ceil((filteredEntries?.length || 0) / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="space-y-6">
@@ -162,6 +178,32 @@ const AdminOutgoingMail = () => {
         <div style={{ display: 'none' }}>
           <PrintReportPreview entries={filteredEntries || []} />
         </div>
+      )}
+      {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationPrevious
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            />
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    isActive={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            )}
+            <PaginationNext
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            />
+          </PaginationContent>
+        </Pagination>
       )}
     </div>
   );

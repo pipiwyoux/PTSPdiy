@@ -19,24 +19,15 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { Appointment } from "@/types/admin";
 
-interface AppointmentModalProps {
+interface EditAppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  appointment: Appointment;
 }
-
-type FormData = {
-  date: string;
-  time: string;
-  name: string;
-  email: string;
-  whatsapp: string;
-  institution: string;
-  meetWith: string;
-  purpose: string;
-};
 
 const WORK_HOURS = [
   "08:00",
@@ -48,35 +39,30 @@ const WORK_HOURS = [
   "15:00",
 ];
 
-const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
+const EditAppointmentModal = ({ isOpen, onClose, appointment }: EditAppointmentModalProps) => {
   const { toast } = useToast();
-  const { register, handleSubmit, reset, setValue } = useForm<FormData>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register, handleSubmit, reset, setValue, formState: { isSubmitting } } = useForm<Appointment>({
+    defaultValues: {
+      ...appointment,
+      date: format(new Date(appointment.date), "yyyy-MM-dd"),
+    }
+  });
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
+  const onSubmit = async (data: Appointment) => {
     try {
-      const appointmentData = {
-        ...data,
-        status: "pending",
-      };
-      const docRef = await addDoc(collection(db, "appointments"), appointmentData);
-      console.log("Appointment data saved to Firestore:", docRef.id, appointmentData);
+      await updateDoc(doc(db, "appointments", appointment.id), data);
       toast({
-        title: "Janji temu berhasil dibuat",
-        description: "Kami akan menghubungi Anda untuk konfirmasi.",
+        title: "Janji temu berhasil diperbarui",
+        description: "Data janji temu telah diperbarui dalam sistem",
       });
       reset();
       onClose();
     } catch (error) {
-      console.error("Error saving appointment data:", error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Gagal membuat janji temu",
+        description: "Gagal memperbarui janji temu",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -85,7 +71,7 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle className="text-center text-lg font-bold">
-            JANJI TEMU DENGAN KEPALA KANTOR, KASUBAG TU, DAN KEPALA SEKSI/ KASI
+            Edit Janji Temu
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
@@ -94,14 +80,13 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
             <Input
               id="date"
               type="date"
-              defaultValue={format(new Date(), "yyyy-MM-dd")}
               {...register("date")}
               required
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="time">Jam</Label>
-            <Select onValueChange={(value) => setValue("time", value)} required>
+            <Select onValueChange={(value) => setValue("time", value)} defaultValue={appointment.time} required>
               <SelectTrigger>
                 <SelectValue placeholder="Pilih jam" />
               </SelectTrigger>
@@ -128,7 +113,7 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="institution">Instansi</Label>
-            <Select onValueChange={(value) => setValue("institution", value)} required>
+            <Select onValueChange={(value) => setValue("institution", value)} defaultValue={appointment.institution} required>
               <SelectTrigger>
                 <SelectValue placeholder="Pilih instansi" />
               </SelectTrigger>
@@ -141,7 +126,7 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="meetWith">Ingin Bertemu</Label>
-            <Select onValueChange={(value) => setValue("meetWith", value)} required>
+            <Select onValueChange={(value) => setValue("meetWith", value)} defaultValue={appointment.meetWith} required>
               <SelectTrigger>
                 <SelectValue placeholder="Pilih pejabat" />
               </SelectTrigger>
@@ -157,7 +142,7 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
             <Textarea id="purpose" {...register("purpose")} required />
           </div>
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Loading..." : "SIMPAN"}
+            {isSubmitting ? "Loading..." : "Simpan"}
           </Button>
         </form>
       </DialogContent>
@@ -165,4 +150,4 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
   );
 };
 
-export default AppointmentModal;
+export default EditAppointmentModal;
