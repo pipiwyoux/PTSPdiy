@@ -44,8 +44,8 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: "Permohonan Rekomendasi Bantuan Pesantren, Madrasah Diniyah Takmiliyah dan Lembaga Pendidikan Al Quran (LPQ)",
-        requirements: "- Surat Permohonan Rekomendasi Bantuan untuk lembaga Pondok Pesantren, Madin dan LPQ\n- Proposal Permohonan Bantuan untuk lembaga Pondok Pesantren, Madin dan LPQ Lengkap\n- NPWP Lembaga/Yayasan.\n- Akta Yayasan/Lembaga dari Notaris atau SK Kemenkuham\n- Piagam Izin Operasional Pondok Pesantren, Madin dan LPQ yang telah terdaftar dan aktif\n- Foto/screenshot Data Pondok Pesantren, Madin dan LPQ telah aktif pada Aplikasi Data EMIS.\n- Surat Pernyataan Keaslian Dokumen.",
-        processingTime: "1 Hari sejak berkas lengkap diterima",
+        requirements: "Persyaratan akan ditampilkan disini",
+        processingTime: "7 hari kerja",
         formLink: "#"
       },
       {
@@ -56,26 +56,26 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: "Permohonan Rekomendasi Pendaftaran Keberadaan Pesantren",
-        requirements: "Persyaratan akan ditampilkan disini",
+        requirements: "1. Struktur Organisasi Pesantren\n2. Data Tenaga Pendidik\n3. Data Tenaga Kependidikan\n4. Data santri mukim minimal 15 santri\n5. Data Kurikulum\n6. Data Kitab Kuning\n7. Jadwal pembelajaran pesantren\n8. Asli Formulir Pengajuan Izin Terdaftar Pesantren\n9. Asli Surat Pernyataan Kesanggupan Setia Kepada NKRI\n10. Asli Surat Keterangan Domisili Kelurahan/Desa\n11. Salinan Akta Notaris Yayasan/Lembaga\n12. Salinan SK Kemenkumham Pengesahan Pendirian Badan Hukum yayasan/lembaga\n13. Salinan Nomor Pokok Wajib Pajak (NPWP) yayasan\n14. Salinan Kartu Tanda Penduduk (KTP) pimpinan pesantren\n15. Bukti lulus pesantren pimpinan pesantren\n16. Salinan Bukti Kepemilikan Tanah Milik atau Wakaf\n17. Dokumentasi Papan Nama Pesantren\n18. Dokumentasi Asrama\n19. Doumentasi Masjid/Mushalla\n20. Dokumentasi ruang belajar\n21. Dokumentasi Aktivitas Pembelajaran Kitab Kuning\n22. Dokumentasi Denah Pesantren\n23. Dokumentasi Dapur\n24. Dokumentasi MCK",
         processingTime: "7 hari kerja",
         formLink: "#"
       },
       {
         name: "Perubahan Data Pondok Pesantren",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Asli Surat Pernyataan Perbaikan Data SK   dan Piagam Statistik Pesantren yang menyatakan data yang salah serta data yang seharusnya (perbaikan) ditandatangani Pimpinan/Pengasuh Pesantren dan bermaterai 10.000\n2. Asli SK dan Piagam Statistik Pesantren yang akan diperbaiki\n3. Semua berkas hardcopy  ASLI disampaikan ke Seksi PD Pontren",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Rekomendasi Perpanjangan ITAS,Izin RPTKA, RPTKA Non-DKPTKA",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Rekomendasi Perpanjangan ITAS,Izin RPTKA, RPTKA Non-DKPTKA\n2. Surat Pernyataan Jaminan dan Sponsor\n3. Fotocopy KTP Sponsor ( berwarna )\n4. Fotocopy Passport (berwarna)\n5. Surat izin tinggal terbatas elektronik dari Imigrasi\n6. Rekomendasi Perpanjangan ITAS,Izin RPTKA, RPTKA Non-DKPTKA  dari Biro Hukum dan Kerjasama Luar 7. Negeri Sekretariat Jenderal Kemenag RI Tahun sebelumnya",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Surat Rekomendasi Pindah Sekolah ( PKPPS/ SPM/ PDF) Kemenag",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Keterangan Pindah Keluar dari lembaga asal ( dicetak dari aplikasi EMIS )\n2. Surat Keterangan dari lembaga penerima\n3. Surat Keterangan Kelakuan Baik dari lembaga Asal\n4. Laporan Hasil Belajar ( Semester terakhir ) Siswa\n5. Kartu Keluarga\n6. Semua Berkas ( 1-5) di scan pdf berurutan",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
@@ -86,20 +86,20 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Pelimpahan Nomor Porsi Haji (Karena Meninggal Dunia dan Karena Sakit Permanen)",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Foto copy Salinan Akte Kematian (bagi yg meninggal dunia)\n2. Surat Keterangan Sakit dari Dokter Pemerintah (bagi yg sakit)\n3. Asli bukti setoran awal dan asli SPPH\n4. Asli Surat kuasa pelimpahan porsi\n5. Asli surat pernyataan tanggung jawab mutlak\n6. Foto copy KTP penerima pelimpahan\n7. Foto copy KK Penerima Pelimpahan\n8. Foto copy Akte Lahir Penerima Pelimpahan\n9. Foto copy Ijazah Penerima Pelimpahan\n10. Foto copy KTP Pemberi Kuasa\n11. Foto copy KK Alm/Almh\n12. Foto copy Rek Penerima Pelimpahan (Bank sama dg Rek Alm/Almh)",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Penggabungan Mahram",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Pengajukan  permohonan  ditempel  materai 10.000\n2. Fotokopi KTP\n3. Fotokopi bukti setoran awal bipih\n4. Fotokopi bukti setoran lunas bpih\n5. Fotokopi KTP jamaah yang akan menggabung\n6. Fotokopi bukti setoran awal bipih jamaah yang akan menggabung\n7. Fotokopi bukti hubungan keluarga (pilih salah satu yang sesuai)\n8. Fotokopii akta nikah (jika Status suami istri),\n9. Fotokopi akta lahir dan KK (jika status orang tua/anak kandung)",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Pembukaan Kantor Cabang PPIU",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Rekomendasi untuk Pengesahan Kantor Cabang PPIU ditujukan kepada Kepala Kantor Kemenag Kab / Kota yang ditandatangani oleh Pimpinan PPIU dan stampel perusahaan;(Asli)\n2. Salinan akte notaris pembentukan Kantor Cabang;\n3. Salinan keputusan izin operasional PPIU;\n4. Surat Keterangan Domisili Kantor Cabang;\n5. Daftar Riwayat Hidup, Kartu Tanda Penduduk (KTP), dan Nomor Pokok Wajib Pajak (NPWP) pimpinan Kantor Cabang\n6. Susunan pengurus Kantor Cabang yang disahkan oleh Pimpinan PPIU; ()\n7. Surat pernyataan di atas materai tentang integritas dan komitmen penyelenggaraan perjalanan ibadah umrah sesuai format yang ditentukan dalam lampiran III Surat Keputusan Dirjen PHU Nomor 338 Tahun 2018 tentang Pedoman Tata Cara, Persyaratan, dan Pelaporan Pembukaan Kantor Cabang Penyelenggara Perjalanan Ibadah Umrah;",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
@@ -110,68 +110,68 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Penerbitan Surat Keterangan Terdaftar (SKT) Majelis Taklim",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan ditujukan kepada Kepala Kantor Kemenag Kota Gorontalo diketahui oleh lurah\n2. Susunan Pengurus dan fotocopy KTP Pengurus\n3. Daftar nama-nama Jamaah, dan minimal 15 fotocopy KTP Jamaah\n4. Surat Pernyataan Pengurus yang menerangkan bahwa majelis taklim tersebut benar benar ada dan diketahui oleh Lurah setempat\n5. Surat Rekomendasi dari kepala KUA Kecamatan\n6. Surat Keterangan Domisili Sekretariat Majelis Taklim yang dibuat oleh Pengurus dan disahkan oleh pemerintah desa/lurah",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Pengukuran Arah Kiblat",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Arah Kiblat\n2. Surat pernyataan Persetujuan dan Belum Pernah Mendapatkan Pengukuran Arah kiblat dari pihak lain.\n3.Denah Lokasi yang akan Diukur Arah Kiblatnya\n4. Surat Pernyataan Keaslian Dokumen.(Di File Pendukung)",
+        processingTime: "5 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Data Pernikahan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "Surat Permohonan ditujukan kepada kepala Kantor Kementerian Agama Kota Gorontalo",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Data Tempat Ibadah Muslim",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "Surat Permohonan ditujukan kepada kepala Kankemenag",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Pembaca Doa",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "Surat Permohonan ditujukan kepada kepala Kankemenag",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Penugasan Wali Hakim",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "Surat Permohonan wali hakim ditujukan kepada kepala Kantor Kementerian Agama Kota Gorontalo",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Perpanjangan Penerbitan Surat Keterangan Terdaftar Majelis Taklim",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat permohonan yang ditujukan kepada Kepala Kankemenag. Kota Gorontalo\n2. Surat Keterangan Terdaftar Majelis Taklim lama.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Bantuan Masjid atau Mushola",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Rekomendasi Bantuan yang ditujukan kepada Kepala Kankemenag.\n2. Surat Keterangan Identitas (ID) Nasional Masjid atau Mushola.\n3. Susunan Pengurus Masjid atau Mushola.\n4. Bila Masjid belum ada pembangunan fisiknya dilampiri: Sertifikat wakaf/SHM, bila sudah ada IMB, Susunan Panitia Pembangunan.\n5. Proposal Bantuan yang akan digunakan untuk mengajukan bantuan.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Pengajuan Bantuan Majelis Taklim",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan ditujukan kepada kepala kantor kemenag Kota Gorontalo yang diketahui oleh Kepala KUA setempat\n2. Surat Keterangan Terdaftar (SKT) Majelis Taklim\n3. Proposal pengajuan bantuan\n4. Surat Pernyataan Keaslian Dokumen (Di file Pendukung).",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rohaniawan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "Surat Permohonan ditujukan kepada kepala Kankemenag",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Surat Keterangan Pendaftaran No ID Nasional Masjid dan Mushalla",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan kepada Kepala Kantor Kankemenag untuk mendapatkan Surat Keterangan Identitas Nasional Masjid atau Mushola\n2. Profil Masjid dan Mushalla\n3. Susunan Pengurus Masjid atau Mushola\n4. Surat Keterangan Status Tanah atau FC Sertifikat Tanah\n5. Bila Masjid belum ada pembangunan fisiknya dilampiri: Sertifikat wakaf/SHM, bila sudah ada IMB, Susunan Panitia Pembangunan.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
