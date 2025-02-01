@@ -16,6 +16,7 @@ import PrintReportPreview from "./mail/PrintReportPreview";
 import IframePrintContent from "./mail/IframePrintContent";
 import * as React from "react";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { useNavigate } from "react-router-dom";
 
 const AdminOutgoingMail = () => {
   const [search, setSearch] = useState("");
@@ -23,10 +24,12 @@ const AdminOutgoingMail = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingEntry, setEditingEntry] = useState<OutgoingMail | null>(null);
   const [printContent, setPrintContent] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 50;
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [hasPrinted, setHasPrinted] = useState(false);
+  const [isPrinting, setIsPrinting] = useState(false);
+  const [printIframeLoaded, setPrintIframeLoaded] = useState(false);
 
   const { data: entries, refetch } = useQuery({
     queryKey: ["outgoingMail", currentPage, itemsPerPage],
@@ -68,7 +71,11 @@ const AdminOutgoingMail = () => {
     setEditingEntry(entry);
   };
 
-  const handlePrint = () => {
+  const handlePrint = useCallback(() => {
+    if (hasPrinted || isPrinting) return;
+    setIsPrinting(true);
+    setHasPrinted(true);
+
     const printContent = document.querySelector('.print-container');
     if (printContent && iframeRef.current) {
       const iframe = iframeRef.current;
@@ -88,10 +95,11 @@ const AdminOutgoingMail = () => {
           if (iframeDocument) {
             iframeDocument.body.innerHTML = '';
           }
+          navigate("/");
         });
       }
     }
-  };
+  }, [hasPrinted, navigate, isPrinting]);
 
   const filteredEntries = entries?.filter(entry => {
     const matchesSearch = 
@@ -123,7 +131,7 @@ const AdminOutgoingMail = () => {
                 setPrintContent(printContent.outerHTML);
               }
               handlePrint();
-            }}>
+            }} disabled={isPrinting}>
             Cetak Laporan
           </Button>
           <Button onClick={() => setShowForm(!showForm)}>
