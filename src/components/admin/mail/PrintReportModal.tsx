@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { OutgoingMail } from "@/types/admin";
 import PrintReportPreview from "./PrintReportPreview";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { format } from "date-fns";
 import {
   Select,
@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useNavigate } from "react-router-dom";
 
 interface PrintReportModalProps {
   isOpen: boolean;
@@ -29,8 +30,13 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const navigate = useNavigate();
+  const [hasPrinted, setHasPrinted] = useState(false);
 
-  const handlePrint = () => {
+  const handlePrint = useCallback(() => {
+    if (hasPrinted) return;
+    setHasPrinted(true);
+
     const printContent = document.querySelector('.print-container');
     if (printContent && iframeRef.current) {
       const iframe = iframeRef.current;
@@ -50,10 +56,13 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
           if (iframeDocument) {
             iframeDocument.body.innerHTML = '';
           }
+          setTimeout(() => {
+            navigate("/admin");
+          }, 100);
         });
       }
     }
-  };
+  }, [hasPrinted, navigate]);
 
   const handleSortOrderChange = (value: "asc" | "desc") => {
     setSortOrder(value);

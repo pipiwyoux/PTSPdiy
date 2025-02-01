@@ -12,14 +12,16 @@ import EditOutgoingMailForm from "./mail/EditOutgoingMailForm";
 import { OutgoingMail } from "@/types/admin";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import PrintReportModal from "./mail/PrintReportModal";
+import PrintReportPreview from "./mail/PrintReportPreview";
+import IframePrintContent from "./mail/IframePrintContent";
 
 const AdminOutgoingMail = () => {
   const [search, setSearch] = useState("");
   const [date, setDate] = useState<Date>();
   const [showForm, setShowForm] = useState(false);
   const [editingEntry, setEditingEntry] = useState<OutgoingMail | null>(null);
-  const [showPrintModal, setShowPrintModal] = useState(false);
+  const [printContent, setPrintContent] = useState<string>("");
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const { toast } = useToast();
 
   const { data: entries, refetch } = useQuery({
@@ -57,7 +59,28 @@ const AdminOutgoingMail = () => {
   };
 
   const handlePrint = () => {
-    setShowPrintModal(true);
+    const printContent = document.querySelector('.print-container');
+    if (printContent && iframeRef.current) {
+      const iframe = iframeRef.current;
+      const iframeDocument = iframe.contentDocument;
+      if (iframeDocument) {
+        iframeDocument.body.innerHTML = printContent.outerHTML;
+        
+        // Use a promise to ensure the iframe content is loaded before printing
+        new Promise<void>((resolve) => {
+          iframe.onload = () => {
+            iframe.contentWindow?.print();
+            resolve();
+          };
+          iframe.contentWindow?.print();
+        }).then(() => {
+          // Reset the iframe content after printing
+          if (iframeDocument) {
+            iframeDocument.body.innerHTML = '';
+          }
+        });
+      }
+    }
   };
 
   const filteredEntries = entries?.filter(entry => {
@@ -78,7 +101,13 @@ const AdminOutgoingMail = () => {
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Surat Keluar</h2>
         <div className="flex gap-2">
-          <Button onClick={handlePrint}>
+          <Button onClick={() => {
+              const printContent = document.querySelector('.print-container');
+              if (printContent) {
+                setPrintContent(printContent.outerHTML);
+              }
+              handlePrint();
+            }}>
             Cetak Laporan
           </Button>
           <Button onClick={() => setShowForm(!showForm)}>
@@ -124,12 +153,16 @@ const AdminOutgoingMail = () => {
         onDelete={handleDelete}
         onEdit={handleEdit}
       />
-
-      <PrintReportModal
-        isOpen={showPrintModal}
-        onClose={() => setShowPrintModal(false)}
-        entries={entries || []}
+      <iframe
+        ref={iframeRef}
+        style={{ display: 'none' }}
+        title="Print Preview"
       />
+      {printContent && (
+        <div style={{ display: 'none' }}>
+          <PrintReportPreview entries={filteredEntries || []} />
+        </div>
+      )}
     </div>
   );
 };
