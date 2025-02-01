@@ -182,26 +182,26 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Pemberkasan Pengawas PAI",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Sertifikat pendidik guru profesional ( Asli)\n2. ijazah pendidikan terakhir (Asli)\n3. Daftar Guru Dampingan dari SIAGA\n4. Surat Tugas Pengawasan\n5. SK CPNS (Asli)\n6. SK PNS (Asli)\n7. SK KGB (Asli)\n8. SK Pangkat Terakhir (Asli)\n9. SK Pensiun (Bagi yg pensiun) Asli\n10. Buku Rekening Bank\n11. KK dan KTP terbaru\n12. NPWP\nDokumen Pendukung\t:	PEMBERKASAN_TPG_PPAI_PAIS.pdf",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Pemberksaan TPG Non ASN",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Sertifikat pendidik guru profesional ( Asli)\n2. ijazah pendidikan terakhir (Asli)\n3. SK TMT Mengajar PAI pertama kali (Asli)\n4. SK Pengangkatan dari Yayasan ( Bagi Guru Tetap Sekolah Swasta) atau keterangan aktif dari Diknas( Guru Tetap Sekolah Negeri)\n5. SK Inpassing ( bagi yang Inpassing )\n6. Buku Rekening Bank\n7. KK dan KTP terbaru\n8. NPWP\nDokumen Pendukung\t:	PEMBERKASAN_TPG_NON_PNS_PAIS1.pdf",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Pemberksaan TPG PNS",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Sertifikat pendidik guru profesional ( Asli)\n2. ijazah pendidikan terakhir (Asli)\n3. SK TMT Mengajar PAI pertama kali (Asli)\n4. SK CPNS (Asli)\n5. SK PNS (Asli)\n6. SK KGB (Asli)\n7. SK Pangkat Terakhir (Asli)\n8. SK Pensiun (Bagi yg pensiun) Asli\n9. Buku Rekening Bank\n10. KK dan KTP terbaru\n11. NPWP\nDokumen Pendukung\t:	PEMBERKASAN_TPG_PNS_PAIS.pdf",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Pemberksaan TPG PPPK",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Sertifikat pendidik guru profesional ( Asli) \n2. ijazah pendidikan terakhir (Asli)  \n3. SK TMT Mengajar PAI pertama kali (Asli)\n4. SK PPPK (Asli)\n5. SPTJM ( Surat Pernyataan Tanggungjawab Mutlak ) yang ditandatangani YBS dan bermaterai\nformat surat sesuai Juknis TPG bertanggal sama dengan SK PPPK *(Template Surat dihalaman\n3)\n6. SPMT ( Surat Pernyataan Melaksanakan Tugas) yg ditandatangani Pejabat terkait  \n7. Buku Rekening Bank \n8. KK dan KTP terbaru \n9. NPWP  \nDokumen Pendukung\t:	PEMBERKASAN_TPG_PPPK_PAIS_.pdf",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
@@ -212,44 +212,44 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Pemberkasan Tunjangan Profesi Guru Madrasah",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Biodata Peserta\n2. Asli cetak SKBK (S29e) per semester\n3. Asli Cetak SKMT (S29a/b), Lampiran S29/b, S29d per semester\n4. Asli Dispensasi Kelayakan bagi yang mengusulkan\n5. Asli Cetak SKAKPT (S39c) per bulan\n6. Daftar Hadir Simpatika (S35) per bulan\n7. Presensi Ropeg per bulan\n8. Surat Perintah Melaksanakan Tugas (SPMT) per bulan\n9. Fc. Kartu Digital GTK per semester\n10. Asli Cetak NRG (26e) per semester\n11. Sertifikat Pendidik per semester\n12. SK Pembagian Tugas per semester\n13. Jadwal Pembagian Tugas Simpatika per semester\n14. Fc. Kenaikan Pangkat Terakhir\n15. Fc. KGB Terakhir\n16. Penilaian Kinerja per bulan\n17. Fc. Rekening BSI\n18. Surat Ijin Cuti (kalau cuti)\n19. Surat Pernyataan Bermaterai\n20. Capaian Kinerja Per Bulan",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Pengajuan Berkas Tukin Guru PNS",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Biodata\n2. Laporan Kinerja Harian Tiap Bulan\n3. Presensi Ropeg Tiap Bulan\n4. SK Kenaikan Pangkat Terakhir\n5. Biodata KGB Terakhir",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Data",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan dari Instansi/Lembaga yang berwenang\n2. Form Permintaan Data",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Bantuan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Proposal Bantuan\n2. Surat Edaran Pengajuan Bantuan",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Penggunaan Honor BOS di atas 60%",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan dari RA/Madrasah\n2. Rencana Kegiatan Anggaran Madrasah (RKAM) untuk madrasah dan Rencana Anggaran Kegiatan RA (RKARA) untuk RA.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Pindah Sekolah Jenjang MI dan MTS",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Rekomendasi dari Madrasah Asal (Difotocopy 1 Lembar)\n2. Surat Penerimaan/ Kuota dari sekolah yang akan dituju ( di Fotocopy 1 Lembar)\n3. Raport Terakhir (di fotocopy 1 Lembar )\n4. Hasil Rekomendasi dibuat Rangkap 2 (1 lembar untuk ybs dan 1 lembar utk arsip)",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi SK Kelembagaan Madrasah",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan Rekomendasi SK dari Lembaga sesuai Juknis nomer 1381 Tahun 2020 dan 5852 Tahun 2020 tentang Pengembangan MGMP, KKG ditanda tangani Ketua Lembaga\n2. Usulan Pengurus Kelembagaan",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
