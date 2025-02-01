@@ -260,38 +260,38 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Permohonan Rekomendasi Izin Kegiatan Keagamaan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan\n2. Proposal Kegiatan yang akan dilaksanakan",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Pendaftaran Ormas Keagamaan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan\n2. AD/ART Organisasi\n3. Akta Pendirian dari notaris\n4. Susunan pengurus beserta fotocopy KTP\n5. Surat Keterangan Domisili yang diketahui oleh pejabat yang berwenang\n6. Rekomendasi dari Majelis Ulama Indonesia (MUI)/Persekutuan Gereja-gereja di Indonesia (PGI)/ Konferensi Waligereja Indonesia (KWI)/Perwakilan Umat Buddha Indonesia (WALUBI)/Parisada Hindu Dharma Indonesia (PHDI)/Majelis Tinggi Agama Khonghucu Indonesia (MATAKIN) tingkat Kota Gorontalo",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Penerbitan Izin Penelitian",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan dari yang bersangkutan atau lembaga\n2. Surat Izin Penelitian dari Dinas Kesbangpol\n3. Fotocopy KTP/Kartu Mahasiswa Pemohon",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Permohonan Rekomendasi Penerbitan Izin PKL/PPL/Magang",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat permohonan dari yang bersangkutan atau lembaga  \n2. KTP/Kartu Mahasiswa Pemohon.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Rekomendasi Bantuan Pembangunan Rumah Ibadah/Sosial Keagamaan",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Permohonan yang memuat alamat permohonan bantuan yang dituju serta bentuk bantuan yang diperlukan.\n2. Proposal Kegiatan.\n3. Foto Copy KTP Pemohon.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       },
       {
         name: "Surat Masuk",
-        requirements: "Persyaratan akan ditampilkan disini",
-        processingTime: "7 hari kerja",
+        requirements: "1. Surat Langsung dikirm Lewat Aplikasi PTSP Online Kemenag Kota Gorontalo Dengan Mmembuat Akun terlebih dahulu.",
+        processingTime: "1 Hari sejak berkas lengkap diterima",
         formLink: "#"
       }
     ]
