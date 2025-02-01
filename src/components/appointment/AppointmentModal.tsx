@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,12 +57,10 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const appointmentData = {
+      await addDoc(collection(db, "appointments"), {
         ...data,
         status: "pending",
-      };
-      const docRef = await addDoc(collection(db, "appointments"), appointmentData);
-      console.log("Appointment data saved to Firestore:", docRef.id, appointmentData);
+      });
       toast({
         title: "Janji temu berhasil dibuat",
         description: "Kami akan menghubungi Anda untuk konfirmasi.",
@@ -87,6 +86,9 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
           <DialogTitle className="text-center text-lg font-bold">
             JANJI TEMU DENGAN KEPALA KANTOR, KASUBAG TU, DAN KEPALA SEKSI/ KASI
           </DialogTitle>
+          <DialogDescription className="text-center text-sm">
+            Silakan isi formulir di bawah ini untuk membuat janji temu.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid gap-2">

@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,6 +74,9 @@ const EditAppointmentModal = ({ isOpen, onClose, appointment }: EditAppointmentM
           <DialogTitle className="text-center text-lg font-bold">
             Edit Janji Temu
           </DialogTitle>
+          <DialogDescription className="text-center text-sm">
+            Silakan perbarui formulir di bawah ini untuk mengubah janji temu.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid gap-2">
