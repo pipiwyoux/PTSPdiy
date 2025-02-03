@@ -30,6 +30,8 @@ const AdminOutgoingMail = () => {
   const [hasPrinted, setHasPrinted] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
   const [printIframeLoaded, setPrintIframeLoaded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 50;
 
   const { data: entries, refetch } = useQuery({
     queryKey: ["outgoingMail", currentPage, itemsPerPage],
