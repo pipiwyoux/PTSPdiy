@@ -1,48 +1,56 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Index from "./pages/Index";
-import Layanan from "./pages/Layanan";
-import SKM from "./pages/SKM";
-import Track from "./pages/Track";
-import JanjiTemu from "./pages/JanjiTemu";
-import BukuTamu from "./pages/BukuTamu";
-import Kontak from "./pages/Kontak";
-import Profile from "./pages/Profile";
-import Permohonan from "./pages/Permohonan";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import QueueRetrieval from "./pages/QueueRetrieval";
 import AdminDashboard from "./pages/AdminDashboard";
+import PublicDisplay from "./pages/PublicDisplay";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/layanan" element={<Layanan />} />
-              <Route path="/skm" element={<SKM />} />
-              <Route path="/track" element={<Track />} />
-              <Route path="/janji-temu" element={<JanjiTemu />} />
-              <Route path="/buku-tamu" element={<BukuTamu />} />
-              <Route path="/kontak" element={<Kontak />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/permohonan" element={<Permohonan />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </BrowserRouter>
       <Toaster />
       <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<QueueRetrieval />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/display" element={<PublicDisplay />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

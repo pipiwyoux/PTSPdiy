@@ -1,22 +1,22 @@
-# Welcome to your Lovable project
+# Welcome to your Tolopani project
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/0f9e38f3-5736-4336-8767-68cd84512579
+**URL**: https://lovable.dev/projects/47ed758c-6ab0-4977-9571-8081d8fbf064
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+**Use Tolopani**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0f9e38f3-5736-4336-8767-68cd84512579) and start prompting.
+Simply visit the [Tolopani Project](https://lovable.dev/projects/47ed758c-6ab0-4977-9571-8081d8fbf064) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+Changes made via Tolopani will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Tolopani.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,7 +62,7 @@ This project is built with .
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/0f9e38f3-5736-4336-8767-68cd84512579) and click on Share -> Publish.
+Simply open [Tolopani](https://lovable.dev/projects/47ed758c-6ab0-4977-9571-8081d8fbf064) and click on Share -> Publish.
 
 ## I want to use a custom domain - is that possible?
 

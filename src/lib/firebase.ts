@@ -1,22 +1,20 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDfz6y_fXD5UmwbvqsiNlSgmSQneZ9JjUM",
-  authDomain: "kemenag-b8baf.firebaseapp.com",
-  projectId: "kemenag-b8baf",
-  storageBucket: "kemenag-b8baf.firebasestorage.app",
-  messagingSenderId: "795584468609",
-  appId: "1:795584468609:web:4bbf7a2ab900b555fa5f80",
-  measurementId: "G-YBJZC2038Q"
+  apiKey: "AIzaSyDYkOM-b7b0fC3peRILiAGpBhmCWCUuyws",
+  authDomain: "ptsp-bcd4e.firebaseapp.com",
+  projectId: "ptsp-bcd4e",
+  storageBucket: "ptsp-bcd4e.firebasestorage.app",
+  messagingSenderId: "98418297936",
+  appId: "1:98418297936:web:00d9a167aae0719b7cd555",
+  measurementId: "G-7ZRJR0EBBQ"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
-const db = getFirestore(app);
+export const db = getFirestore(app);
+export const analytics = getAnalytics(app);
 
-export { app, analytics, auth, db };
+export default app;
