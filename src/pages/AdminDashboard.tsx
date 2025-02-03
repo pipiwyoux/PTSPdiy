@@ -1,90 +1,48 @@
-import { useState, useEffect } from "react"
-import { useToast } from "@/hooks/use-toast"
-import Navigation from "@/components/Navigation"
-import { getTodayQueues, updateQueueStatus, getQueuesByDay, Queue } from "@/lib/firestore"
-import QueueStats from "@/components/admin/QueueStats"
-import ActiveQueues from "@/components/admin/ActiveQueues"
-import QueueHistory from "@/components/admin/QueueHistory"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { auth } from "@/lib/firebase";
+import AdminServiceRequests from "@/components/admin/AdminServiceRequests";
+import AdminAppointments from "@/components/admin/AdminAppointments";
+import AdminGuestBook from "@/components/admin/AdminGuestBook";
+import AdminIncomingMail from "@/components/admin/AdminIncomingMail";
+import AdminOutgoingMail from "@/components/admin/AdminOutgoingMail";
+import AdminSidebar from "@/components/admin/AdminSidebar";
+import PrintReportPage from "./PrintReportPage";
 
 const AdminDashboard = () => {
-  const [todayQueues, setTodayQueues] = useState<Queue[]>([])
-  const [queuesByDay, setQueuesByDay] = useState<Record<string, Queue[]>>({})
-  const { toast } = useToast()
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("layanan");
 
   useEffect(() => {
-    const fetchQueues = async () => {
-      try {
-        const [today, historical] = await Promise.all([
-          getTodayQueues(),
-          getQueuesByDay()
-        ])
-        setTodayQueues(today as Queue[])
-        setQueuesByDay(historical)
-      } catch (error) {
-        console.error('Error fetching queues:', error)
-        toast({
-          title: "Error",
-          description: "Gagal mengambil data antrian",
-          variant: "destructive",
-        })
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user || user.email !== "admin@tolopani.net") {
+        navigate("/");
       }
-    }
+    });
 
-    fetchQueues()
-    const interval = setInterval(fetchQueues, 30000)
-    return () => clearInterval(interval)
-  }, [toast])
-
-  const callNumber = async (id: string) => {
-    const queueToCall = todayQueues.find((q) => q.id === id)
-    
-    if (!queueToCall || queueToCall.status === "called") {
-      return
-    }
-
-    try {
-      await updateQueueStatus(id, "called")
-      setTodayQueues(prev =>
-        prev.map(q =>
-          q.id === id ? { ...q, status: "called" } : q
-        )
-      )
-
-      const serviceName = queueToCall.service === "Layanan Haji" ? "Haji dan Umrah" : queueToCall.service
-      const announcement = `Nomor antrian ${queueToCall.number} untuk ${serviceName}, silakan menuju ke loket`
-      
-      const speech = new SpeechSynthesisUtterance(announcement)
-      speech.lang = 'id-ID'
-      window.speechSynthesis.speak(speech)
-
-      toast({
-        title: "Nomor Antrian Dipanggil",
-        description: `Memanggil nomor ${queueToCall.number} untuk ${serviceName}`,
-      })
-    } catch (error) {
-      console.error('Error calling number:', error)
-      toast({
-        title: "Error",
-        description: "Gagal memanggil nomor antrian",
-        variant: "destructive",
-      })
-    }
-  }
+    return () => unsubscribe();
+  }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <Navigation />
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-primary mb-8">
-          Sistem Manajemen Antrian
-        </h1>
-
-        <QueueStats todayQueues={todayQueues} />
-        <ActiveQueues queues={todayQueues} onCallNumber={callNumber} />
-        <QueueHistory queuesByDay={queuesByDay} />
+    <SidebarProvider defaultOpen>
+      <div className="min-h-screen flex w-full bg-gray-50 dark:bg-gray-900">
+        <AdminSidebar activeTab={activeTab} onTabChange={setActiveTab} />
+        <main className="flex-1 overflow-auto">
+          <div className="container mx-auto px-6 py-8">
+            <h1 className="text-3xl font-bold mb-8 text-primary">Dashboard Admin</h1>
+            
+            {activeTab === "layanan" && <AdminServiceRequests />}
+            {activeTab === "janji-temu" && <AdminAppointments />}
+            {activeTab === "buku-tamu" && <AdminGuestBook />}
+            {activeTab === "agenda-surat-masuk" && <AdminIncomingMail />}
+            {activeTab === "agenda-surat-keluar" && <AdminOutgoingMail />}
+            {activeTab === "cetak-laporan" && <PrintReportPage />}
+          </div>
+        </main>
       </div>
-    </div>
-  )
-}
+    </SidebarProvider>
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;
