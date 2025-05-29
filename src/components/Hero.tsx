@@ -81,7 +81,7 @@ const Hero = () => {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src="https://lh3.googleusercontent.com/p/AF1QipOdAAv0Lw1xxIFZlmD2U90DY2rzHAoLoJvzycgw=s680-w680-h510"
+          src="/fotokantor.webp"
           alt="Kantor Kementerian Agama Kota Gorontalo"
         />
       </div>
