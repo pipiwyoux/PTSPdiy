@@ -1,12 +1,72 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/layanan",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/skm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/track",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/janji-temu",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/buku-tamu",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/kontak",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/permohonan",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin",
       "destination": "/index.html"
     },
     {
       "source": "/admin/(.*)",
       "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
