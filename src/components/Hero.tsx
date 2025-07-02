@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { LogIn, UserPlus } from "lucide-react";
+import { useState, useEffect } from "react";
+import { LogIn, UserPlus, User } from "lucide-react";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 
@@ -8,6 +10,17 @@ const Hero = () => {
   const [loginType, setLoginType] = useState<"pemohon" | "petugas" | null>(null);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoginDropdownOpen, setIsLoginDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+      setUserEmail(user?.email || null);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleLoginClick = (type: "pemohon" | "petugas") => {
     setLoginType(type);
@@ -35,45 +48,64 @@ const Hero = () => {
               <p className="mt-2 text-sm text-gray-300 sm:text-base">
                 Layanan Perizinan, Non Perizinan, Informasi, Konsultasi, Pengaduan dan Legalisir
               </p>
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div className="relative">
-                  <button
-                    onClick={() => setIsLoginDropdownOpen(!isLoginDropdownOpen)}
-                    onBlur={() => setTimeout(() => setIsLoginDropdownOpen(false), 200)}
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-secondary hover:bg-opacity-90 md:py-4 md:text-lg md:px-10"
-                  >
-                    <LogIn className="mr-2 h-5 w-5" />
-                    Login
-                  </button>
-                  {isLoginDropdownOpen && (
-                    <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                      <div className="py-1">
-                        <button
-                          onClick={() => handleLoginClick("pemohon")}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Login Pemohon
-                        </button>
-                        <button
-                          onClick={() => handleLoginClick("petugas")}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          Login Petugas
-                        </button>
+              
+              {/* Show login buttons only when user is not logged in */}
+              {!isLoggedIn && (
+                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsLoginDropdownOpen(!isLoginDropdownOpen)}
+                      onBlur={() => setTimeout(() => setIsLoginDropdownOpen(false), 200)}
+                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-secondary hover:bg-opacity-90 md:py-4 md:text-lg md:px-10"
+                    >
+                      <LogIn className="mr-2 h-5 w-5" />
+                      Login
+                    </button>
+                    {isLoginDropdownOpen && (
+                      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                        <div className="py-1">
+                          <button
+                            onClick={() => handleLoginClick("pemohon")}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Login Pemohon
+                          </button>
+                          <button
+                            onClick={() => handleLoginClick("petugas")}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Login Petugas
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="mt-3 sm:mt-0 sm:ml-3">
+                    <button
+                      onClick={() => setIsRegisterOpen(true)}
+                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10"
+                    >
+                      <UserPlus className="mr-2 h-5 w-5" />
+                      Buat Akun
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Show welcome message when user is logged in */}
+              {isLoggedIn && (
+                <div className="mt-5 sm:mt-8">
+                  <div className="flex items-center justify-center lg:justify-start">
+                    <div className="flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                      <User className="h-5 w-5 text-secondary mr-3" />
+                      <div>
+                        <p className="text-white text-sm">Selamat datang kembali,</p>
+                        <p className="text-secondary font-medium">{userEmail}</p>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <button
-                    onClick={() => setIsRegisterOpen(true)}
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10"
-                  >
-                    <UserPlus className="mr-2 h-5 w-5" />
-                    Buat Akun
-                  </button>
-                </div>
-              </div>
+              )}
             </motion.div>
           </main>
         </div>
