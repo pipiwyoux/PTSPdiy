@@ -19,15 +19,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-14 sm:h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Kementerian_Agama_new_logo.png"
                 alt="Logo"
-                className="h-12 w-auto"
+                className="h-8 sm:h-10 md:h-12 w-auto"
               />
             </Link>
           </div>

@@ -37,46 +37,47 @@ const AppointmentsTable = ({ appointments, onUpdateStatus, onDelete, onEdit }: A
 
   return (
     <>
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>No</TableHead>
-              <TableHead>Tanggal</TableHead>
-              <TableHead>Jam</TableHead>
-              <TableHead>Nama Tamu</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Instansi</TableHead>
-              <TableHead>Bertemu</TableHead>
-              <TableHead>Keperluan</TableHead>
-              <TableHead>No WhatsApp</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Aksi</TableHead>
+              <TableHead className="whitespace-nowrap">No</TableHead>
+              <TableHead className="whitespace-nowrap">Tanggal</TableHead>
+              <TableHead className="whitespace-nowrap">Jam</TableHead>
+              <TableHead className="whitespace-nowrap">Nama Tamu</TableHead>
+              <TableHead className="whitespace-nowrap">Email</TableHead>
+              <TableHead className="whitespace-nowrap">Instansi</TableHead>
+              <TableHead className="whitespace-nowrap">Bertemu</TableHead>
+              <TableHead className="whitespace-nowrap">Keperluan</TableHead>
+              <TableHead className="whitespace-nowrap">No WhatsApp</TableHead>
+              <TableHead className="whitespace-nowrap">Status</TableHead>
+              <TableHead className="whitespace-nowrap">Aksi</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {appointments.map((appointment, index) => (
               <TableRow key={appointment.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{format(new Date(appointment.date), "dd/MM/yyyy")}</TableCell>
-                <TableCell>{appointment.time}</TableCell>
-                <TableCell>{appointment.name}</TableCell>
-                <TableCell>{appointment.email}</TableCell>
-                <TableCell>{appointment.institution}</TableCell>
-                <TableCell>{appointment.meetWith}</TableCell>
-                <TableCell>{appointment.purpose}</TableCell>
-                <TableCell>{appointment.whatsapp}</TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">{index + 1}</TableCell>
+                <TableCell className="whitespace-nowrap">{format(new Date(appointment.date), "dd/MM/yyyy")}</TableCell>
+                <TableCell className="whitespace-nowrap">{appointment.time}</TableCell>
+                <TableCell className="max-w-[150px] truncate">{appointment.name}</TableCell>
+                <TableCell className="max-w-[200px] truncate">{appointment.email}</TableCell>
+                <TableCell className="whitespace-nowrap">{appointment.institution}</TableCell>
+                <TableCell className="whitespace-nowrap">{appointment.meetWith}</TableCell>
+                <TableCell className="max-w-[200px] truncate">{appointment.purpose}</TableCell>
+                <TableCell className="whitespace-nowrap">{appointment.whatsapp}</TableCell>
+                <TableCell className="min-w-[120px]">
                   <AppointmentStatusSelect
                     status={appointment.status}
                     onValueChange={(value) => onUpdateStatus(appointment.id, value)}
                   />
                 </TableCell>
-                <TableCell>
-                  <div className="flex gap-2">
+                <TableCell className="whitespace-nowrap">
+                  <div className="flex gap-1">
                     <Button
                       variant="ghost"
                       size="icon"
+                      className="h-8 w-8"
                       onClick={() => handleWhatsAppClick(appointment.whatsapp)}
                     >
                       <MessageSquare className="h-4 w-4" />
@@ -84,6 +85,7 @@ const AppointmentsTable = ({ appointments, onUpdateStatus, onDelete, onEdit }: A
                     <Button
                       variant="ghost"
                       size="icon"
+                      className="h-8 w-8"
                       onClick={() => handleEditClick(appointment)}
                     >
                       <Edit className="h-4 w-4" />
@@ -91,6 +93,7 @@ const AppointmentsTable = ({ appointments, onUpdateStatus, onDelete, onEdit }: A
                     <Button
                       variant="ghost"
                       size="icon"
+                      className="h-8 w-8"
                       onClick={() => onDelete?.(appointment.id)}
                     >
                       <Trash className="h-4 w-4" />

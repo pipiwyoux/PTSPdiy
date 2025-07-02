@@ -67,100 +67,110 @@ const BukuTamu = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-8">Buku Tamu</h1>
+    <div className="container mx-auto px-4 py-6 sm:py-8 max-w-2xl">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center sm:text-left">Buku Tamu</h1>
       
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="nama"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nama Lengkap</FormLabel>
-                <FormControl>
-                  <Input placeholder="Masukkan nama lengkap" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="alamat"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Alamat</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Masukkan alamat lengkap" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="tujuan"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Tujuan</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+            <FormField
+              control={form.control}
+              name="nama"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nama Lengkap</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Pilih tujuan" />
-                    </SelectTrigger>
+                    <Input placeholder="Masukkan nama lengkap" {...field} />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="HAJI DAN UMRAH">HAJI DAN UMRAH</SelectItem>
-                    <SelectItem value="SETJEN">SETJEN</SelectItem>
-                    <SelectItem value="MADRASAH">MADRASAH</SelectItem>
-                    <SelectItem value="PAI">PAI</SelectItem>
-                    <SelectItem value="PD PONTREN">PD PONTREN</SelectItem>
-                    <SelectItem value="ZAKAT WAKAF">ZAKAT WAKAF</SelectItem>
-                    <SelectItem value="BIMAS ISLAM">BIMAS ISLAM</SelectItem>
-                    <SelectItem value="PRIBADI">PRIBADI</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="detailLayanan"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Detail Layanan</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Masukkan detail layanan yang dibutuhkan" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="alamat"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Alamat</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Masukkan alamat lengkap" 
+                      className="min-h-[80px] resize-none"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="nomorHp"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nomor HP</FormLabel>
-                <FormControl>
-                  <Input type="tel" placeholder="Masukkan nomor HP" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="tujuan"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tujuan</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Pilih tujuan" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="HAJI DAN UMRAH">HAJI DAN UMRAH</SelectItem>
+                      <SelectItem value="SETJEN">SETJEN</SelectItem>
+                      <SelectItem value="MADRASAH">MADRASAH</SelectItem>
+                      <SelectItem value="PAI">PAI</SelectItem>
+                      <SelectItem value="PD PONTREN">PD PONTREN</SelectItem>
+                      <SelectItem value="ZAKAT WAKAF">ZAKAT WAKAF</SelectItem>
+                      <SelectItem value="BIMAS ISLAM">BIMAS ISLAM</SelectItem>
+                      <SelectItem value="PRIBADI">PRIBADI</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <Button type="submit" className="w-full">
-            Kirim
-          </Button>
-        </form>
-      </Form>
+            <FormField
+              control={form.control}
+              name="detailLayanan"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Detail Layanan</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Masukkan detail layanan yang dibutuhkan" 
+                      className="min-h-[80px] resize-none"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="nomorHp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nomor HP</FormLabel>
+                  <FormControl>
+                    <Input type="tel" placeholder="Masukkan nomor HP" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" className="w-full">
+              Kirim
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

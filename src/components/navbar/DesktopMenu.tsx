@@ -58,12 +58,12 @@ const DesktopMenu = ({
   };
 
   return (
-    <div className="hidden md:flex md:items-center md:space-x-4">
+    <div className="hidden md:flex md:items-center md:space-x-2 lg:space-x-4">
       {MenuItems.map((item) => (
         <Link
           key={item.name}
           to={item.path}
-          className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+          className="text-gray-700 hover:text-primary px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
         >
           {item.name}
         </Link>
@@ -74,18 +74,18 @@ const DesktopMenu = ({
           {isAdmin ? (
             <Link
               to="/admin"
-              className="flex items-center text-secondary hover:text-secondary/80 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="flex items-center text-secondary hover:text-secondary/80 px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
             >
-              <FileText className="w-4 h-4 mr-2" />
-              Dashboard
+              <FileText className="w-4 h-4 mr-1 lg:mr-2" />
+              <span className="hidden lg:inline">Dashboard</span>
             </Link>
           ) : (
             <Link
               to="/permohonan"
-              className="flex items-center text-secondary hover:text-secondary/80 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="flex items-center text-secondary hover:text-secondary/80 px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
             >
-              <FileText className="w-4 h-4 mr-2" />
-              Permohonan Anda
+              <FileText className="w-4 h-4 mr-1 lg:mr-2" />
+              <span className="hidden lg:inline">Permohonan</span>
             </Link>
           )}
         </>
@@ -93,12 +93,12 @@ const DesktopMenu = ({
 
       {isLoggedIn ? (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
-            <User className="w-4 h-4 mr-2" />
-            {userName}
-            <ChevronDown className="ml-1 h-4 w-4" />
+          <DropdownMenuTrigger className="flex items-center bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors max-w-[200px]">
+            <User className="w-4 h-4 mr-1 lg:mr-2 flex-shrink-0" />
+            <span className="truncate hidden sm:inline max-w-[120px]">{userName}</span>
+            <ChevronDown className="ml-1 h-4 w-4 flex-shrink-0" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuItem asChild>
               <Link to="/profile" className="flex items-center">
                 <User className="w-4 h-4 mr-2" />
@@ -121,17 +121,17 @@ const DesktopMenu = ({
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <>
+        <div className="flex items-center space-x-2">
           <button
             onClick={() => setIsRegisterOpen(true)}
-            className="bg-secondary text-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors"
+            className="bg-secondary text-primary px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap"
           >
             Buat Akun
           </button>
           <div className="relative">
             <button
               onClick={() => setIsLoginOpen(!isLoginOpen)}
-              className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors flex items-center"
+              className="bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors flex items-center whitespace-nowrap"
             >
               Login <ChevronDown className="ml-1 h-4 w-4" />
             </button>
@@ -154,7 +154,7 @@ const DesktopMenu = ({
               </div>
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -91,14 +91,14 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
   if (!service) return null;
 
   const renderAuthenticatedContent = () => (
-    <div className="space-y-6">
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-primary mb-2">Persyaratan:</h3>
-        <p className="text-gray-700">{service.requirements}</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+        <h3 className="font-semibold text-primary mb-2 text-sm sm:text-base">Persyaratan:</h3>
+        <p className="text-gray-700 text-xs sm:text-sm whitespace-pre-line">{service.requirements}</p>
       </div>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-primary mb-2">Waktu Pengerjaan:</h3>
-        <p className="text-gray-700">{service.processingTime}</p>
+      <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+        <h3 className="font-semibold text-primary mb-2 text-sm sm:text-base">Waktu Pengerjaan:</h3>
+        <p className="text-gray-700 text-xs sm:text-sm">{service.processingTime}</p>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
@@ -107,17 +107,17 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
             name="formLink"
             render={({ field }) => (
               <FormItem>
-                <h3 className="font-semibold text-primary mb-2">
+                <h3 className="font-semibold text-primary mb-2 text-sm sm:text-base">
                   Formulir Permohonan:
                 </h3>
                 <FormControl>
                   <Textarea
                     placeholder="Masukkan link dokumen Google Drive/OneDrive/Dropbox"
-                    className="resize-none"
+                    className="resize-none min-h-[80px] text-sm"
                     {...field}
                   />
                 </FormControl>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   *Pastikan link/folder sudah dishare public
                 </p>
               </FormItem>
@@ -135,20 +135,20 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
   );
 
   const renderUnauthenticatedContent = () => (
-    <div className="space-y-6">
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-primary mb-2">Persyaratan:</h3>
-        <p className="text-gray-700">{service.requirements}</p>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+        <h3 className="font-semibold text-primary mb-2 text-sm sm:text-base">Persyaratan:</h3>
+        <p className="text-gray-700 text-xs sm:text-sm whitespace-pre-line">{service.requirements}</p>
       </div>
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-primary mb-2">Waktu Pengerjaan:</h3>
-        <p className="text-gray-700">{service.processingTime}</p>
+      <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+        <h3 className="font-semibold text-primary mb-2 text-sm sm:text-base">Waktu Pengerjaan:</h3>
+        <p className="text-gray-700 text-xs sm:text-sm">{service.processingTime}</p>
       </div>
       <div className="space-y-4">
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 text-sm">
           Silakan login atau buat akun untuk mengajukan permohonan layanan
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button
             className="flex-1 bg-primary hover:bg-primary/90 text-white"
             onClick={() => setShowLoginModal(true)}
@@ -169,12 +169,12 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[500px] bg-white">
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-white mx-4">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-primary">
+            <DialogTitle className="text-lg sm:text-xl font-bold text-primary pr-6">
               {service.name}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-sm">
               {auth.currentUser
                 ? "Silakan lengkapi formulir permohonan di bawah ini"
                 : "Informasi layanan"}
