@@ -4,8 +4,10 @@ export interface Appointment {
   time: string;
   name: string;
   email: string;
+  whatsapp: string;
   institution: string;
   meetWith: string;
+  purpose: string;
   status: "pending" | "approved" | "rejected";
 }
 
@@ -15,6 +17,7 @@ export interface ServiceRequest {
   userEmail: string;
   namaLengkap: string;
   email: string;
+  nomorHp: string;
   tanggal: string;
   noRegistrasi: string;
   seksi: string;

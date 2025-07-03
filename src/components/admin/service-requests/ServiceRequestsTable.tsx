@@ -28,49 +28,48 @@ const ServiceRequestsTable = ({
   onDelete,
   onEdit 
 }: ServiceRequestsTableProps) => {
-  const handleWhatsAppClick = (email: string) => {
-    // Since we don't have phone number in ServiceRequest, we'll use a generic message
-    const message = `Halo, saya dari Kantor Kementerian Agama Kota Gorontalo. Terkait permohonan layanan Anda dengan email ${email}, silakan hubungi kami untuk informasi lebih lanjut.`;
-    const encodedMessage = encodeURIComponent(message);
-    const url = `https://wa.me/?text=${encodedMessage}`;
+  const handleWhatsAppClick = (phoneNumber: string) => {
+    const url = `https://wa.me/${phoneNumber.replace(/\D/g, '')}`;
     window.open(url, '_blank');
   };
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>No</TableHead>
-            <TableHead>Tanggal</TableHead>
-            <TableHead>No Registrasi</TableHead>
-            <TableHead>Nama Pemohon</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Seksi</TableHead>
-            <TableHead>PIC</TableHead>
-            <TableHead>Layanan</TableHead>
-            <TableHead>Link</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Aksi</TableHead>
+            <TableHead className="whitespace-nowrap">No</TableHead>
+            <TableHead className="whitespace-nowrap">Tanggal</TableHead>
+            <TableHead className="whitespace-nowrap">No Registrasi</TableHead>
+            <TableHead className="whitespace-nowrap">Nama Pemohon</TableHead>
+            <TableHead className="whitespace-nowrap">Email</TableHead>
+            <TableHead className="whitespace-nowrap">No HP</TableHead>
+            <TableHead className="whitespace-nowrap">Seksi</TableHead>
+            <TableHead className="whitespace-nowrap">PIC</TableHead>
+            <TableHead className="whitespace-nowrap">Layanan</TableHead>
+            <TableHead className="whitespace-nowrap">Link</TableHead>
+            <TableHead className="whitespace-nowrap">Status</TableHead>
+            <TableHead className="whitespace-nowrap">Aksi</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {requests.map((request, index) => (
             <TableRow key={request.id}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{format(new Date(request.tanggal), "dd/MM/yyyy")}</TableCell>
-              <TableCell>{request.noRegistrasi}</TableCell>
-              <TableCell>{request.namaLengkap}</TableCell>
-              <TableCell>{request.email}</TableCell>
-              <TableCell>{request.seksi}</TableCell>
-              <TableCell>
+              <TableCell className="whitespace-nowrap">{index + 1}</TableCell>
+              <TableCell className="whitespace-nowrap">{format(new Date(request.tanggal), "dd/MM/yyyy")}</TableCell>
+              <TableCell className="whitespace-nowrap">{request.noRegistrasi}</TableCell>
+              <TableCell className="max-w-[150px] truncate">{request.namaLengkap}</TableCell>
+              <TableCell className="max-w-[200px] truncate">{request.email}</TableCell>
+              <TableCell className="whitespace-nowrap">{request.nomorHp}</TableCell>
+              <TableCell className="whitespace-nowrap">{request.seksi}</TableCell>
+              <TableCell className="min-w-[140px]">
                 <ServiceRequestPICSelect
                   pic={request.pic || ""}
                   onValueChange={(value) => onUpdatePIC(request.id, value)}
                 />
               </TableCell>
-              <TableCell>{request.layanan}</TableCell>
-              <TableCell>
+              <TableCell className="max-w-[200px] truncate">{request.layanan}</TableCell>
+              <TableCell className="whitespace-nowrap">
                 {request.link && (
                   <a 
                     href={request.link} 
@@ -83,19 +82,19 @@ const ServiceRequestsTable = ({
                   </a>
                 )}
               </TableCell>
-              <TableCell>
+              <TableCell className="min-w-[120px]">
                 <ServiceRequestStatusSelect
                   status={request.status}
                   onValueChange={(value) => onUpdateStatus(request.id, value)}
                 />
               </TableCell>
-              <TableCell>
-                <div className="flex gap-2">
+              <TableCell className="whitespace-nowrap">
+                <div className="flex gap-1">
                   <Button
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
-                    onClick={() => handleWhatsAppClick(request.email)}
+                    onClick={() => handleWhatsAppClick(request.nomorHp)}
                     title="Kirim pesan WhatsApp"
                   >
                     <MessageSquare className="h-4 w-4" />

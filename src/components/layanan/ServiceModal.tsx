@@ -60,6 +60,7 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
         userEmail: auth.currentUser.email,
         namaLengkap: userData?.name || "",
         email: userData?.email || "",
+        nomorHp: userData?.whatsapp || "",
         tanggal: new Date().toISOString(),
         noRegistrasi: `REG-${Date.now()}`,
         seksi: service?.section || "",
