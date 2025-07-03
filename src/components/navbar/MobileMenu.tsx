@@ -125,7 +125,7 @@ const MobileMenu = ({
                   >
                     <Link to="/skm" className="flex items-center">
                       <FileText className="w-4 h-4 mr-2" />
-                      SKM Online
+                      Isi Survey
                     </Link>
                   </Button>
                   <Button
