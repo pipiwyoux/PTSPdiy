@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import { ServiceRequest } from "@/types/admin";
 import ServiceRequestStatusSelect from "./ServiceRequestStatusSelect";
 import ServiceRequestPICSelect from "./ServiceRequestPICSelect";
-import { Link } from "lucide-react";
+import { Link, MessageSquare } from "lucide-react";
 
 interface ServiceRequestsTableProps {
   requests: ServiceRequest[];
@@ -28,6 +28,14 @@ const ServiceRequestsTable = ({
   onDelete,
   onEdit 
 }: ServiceRequestsTableProps) => {
+  const handleWhatsAppClick = (email: string) => {
+    // Since we don't have phone number in ServiceRequest, we'll use a generic message
+    const message = `Halo, saya dari Kantor Kementerian Agama Kota Gorontalo. Terkait permohonan layanan Anda dengan email ${email}, silakan hubungi kami untuk informasi lebih lanjut.`;
+    const encodedMessage = encodeURIComponent(message);
+    const url = `https://wa.me/?text=${encodedMessage}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="rounded-md border">
       <Table>
@@ -83,6 +91,15 @@ const ServiceRequestsTable = ({
               </TableCell>
               <TableCell>
                 <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => handleWhatsAppClick(request.email)}
+                    title="Kirim pesan WhatsApp"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                  </Button>
                   <Button 
                     variant="outline" 
                     size="sm"
