@@ -69,6 +69,7 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
         status: "pending",
         formLink: data.formLink,
         link: data.formLink,
+        pic: "",
         createdAt: new Date().toISOString(),
       };
 
