@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, limit, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/components/ui/use-toast";
 import { format } from "date-fns";
@@ -26,10 +26,33 @@ const AdminServiceRequests = () => {
         limit(itemsPerPage)
       );
       const querySnapshot = await getDocs(q);
-      return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as ServiceRequest[];
+      
+      // Get service requests with user data
+      const requestsWithUserData = await Promise.all(
+        querySnapshot.docs.map(async (docSnapshot) => {
+          const requestData = {
+            id: docSnapshot.id,
+            ...docSnapshot.data()
+          } as ServiceRequest;
+
+          // If nomorHp is missing and we have userId, try to get it from user data
+          if (!requestData.nomorHp && requestData.userId) {
+            try {
+              const userDoc = await getDoc(doc(db, "users", requestData.userId));
+              if (userDoc.exists()) {
+                const userData = userDoc.data();
+                requestData.nomorHp = userData.whatsapp || "";
+              }
+            } catch (error) {
+              console.log("Could not fetch user data for:", requestData.userId);
+            }
+          }
+
+          return requestData;
+        })
+      );
+
+      return requestsWithUserData;
     },
     keepPreviousData: true,
   });

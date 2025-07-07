@@ -29,6 +29,7 @@ const ServiceRequestsTable = ({
   onEdit 
 }: ServiceRequestsTableProps) => {
   const handleWhatsAppClick = (phoneNumber: string) => {
+    if (!phoneNumber) return;
     const url = `https://wa.me/${phoneNumber.replace(/\D/g, '')}`;
     window.open(url, '_blank');
   };
@@ -60,7 +61,7 @@ const ServiceRequestsTable = ({
               <TableCell className="whitespace-nowrap">{request.noRegistrasi}</TableCell>
               <TableCell className="max-w-[150px] truncate">{request.namaLengkap}</TableCell>
               <TableCell className="max-w-[200px] truncate">{request.email}</TableCell>
-              <TableCell className="whitespace-nowrap">{request.nomorHp}</TableCell>
+              <TableCell className="whitespace-nowrap">{request.nomorHp || '-'}</TableCell>
               <TableCell className="whitespace-nowrap">{request.seksi}</TableCell>
               <TableCell className="min-w-[140px]">
                 <ServiceRequestPICSelect
@@ -90,15 +91,17 @@ const ServiceRequestsTable = ({
               </TableCell>
               <TableCell className="whitespace-nowrap">
                 <div className="flex gap-1">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => handleWhatsAppClick(request.nomorHp)}
-                    title="Kirim pesan WhatsApp"
-                  >
-                    <MessageSquare className="h-4 w-4" />
-                  </Button>
+                  {request.nomorHp && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => handleWhatsAppClick(request.nomorHp)}
+                      title="Kirim pesan WhatsApp"
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                    </Button>
+                  )}
                   <Button 
                     variant="outline" 
                     size="sm"
