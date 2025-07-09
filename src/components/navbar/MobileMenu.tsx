@@ -25,6 +25,7 @@ const MobileMenu = ({
 }: MobileMenuProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -47,19 +48,26 @@ const MobileMenu = ({
         description: "Anda telah keluar dari sistem",
       });
       navigate("/");
-      toggleMenu();
+      setIsSheetOpen(false);
     } catch (error) {
       console.error("Error logging out:", error);
     }
   };
 
+  const handleMenuItemClick = () => {
+    setIsSheetOpen(false);
+  };
   return (
     <div className="md:hidden">
       <Sheet>
+  const handleRegisterClickWithClose = () => {
+    setIsRegisterOpen(true);
+    setIsSheetOpen(false);
+  };
         <SheetTrigger asChild>
           <Button
             variant="ghost"
-            className="px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           >
             <Menu className="h-6 w-6" />
             <span className="sr-only">Toggle Menu</span>
@@ -77,7 +85,7 @@ const MobileMenu = ({
                 >
                   {item.name}
                 </Link>
-              ))}
+                  onClick={handleMenuItemClick}
               {isLoggedIn && (
                 <>
                   {isAdmin ? (
@@ -88,7 +96,7 @@ const MobileMenu = ({
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       Dashboard
-                    </Link>
+                      onClick={handleMenuItemClick}
                   ) : (
                     <Link
                       to="/permohonan"
@@ -97,7 +105,7 @@ const MobileMenu = ({
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       Permohonan Anda
-                    </Link>
+                      onClick={handleMenuItemClick}
                   )}
                 </>
               )}
@@ -113,7 +121,7 @@ const MobileMenu = ({
                     asChild
                   >
                     <Link to="/profile" className="flex items-center">
-                      <User className="w-4 h-4 mr-2" />
+                    onClick={handleMenuItemClick}
                       Profil
                     </Link>
                   </Button>
@@ -124,7 +132,7 @@ const MobileMenu = ({
                     asChild
                   >
                     <Link to="/skm" className="flex items-center">
-                      <FileText className="w-4 h-4 mr-2" />
+                    onClick={handleMenuItemClick}
                       Isi Survey
                     </Link>
                   </Button>
@@ -147,8 +155,7 @@ const MobileMenu = ({
                       toggleMenu();
                     }}
                   >
-                    Buat Akun
-                  </Button>
+                      handleRegisterClickWithClose();
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
@@ -157,8 +164,7 @@ const MobileMenu = ({
                       toggleMenu();
                     }}
                   >
-                    Login Pemohon
-                  </Button>
+                      handleLoginClickWithClose("pemohon");
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
@@ -167,8 +173,7 @@ const MobileMenu = ({
                       toggleMenu();
                     }}
                   >
-                    Login Petugas
-                  </Button>
+                      handleLoginClickWithClose("petugas");
                 </>
               )}
             </div>
@@ -179,4 +184,8 @@ const MobileMenu = ({
   );
 };
 
+  const handleLoginClickWithClose = (type: "pemohon" | "petugas") => {
+    handleLoginClick(type);
+    setIsSheetOpen(false);
+  };
 export default MobileMenu;
