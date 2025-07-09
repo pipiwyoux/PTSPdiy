@@ -29,9 +29,9 @@ const DispositionModal = ({ isOpen, onClose, mail }: DispositionModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" aria-labelledby="disposition-title">
         <DialogHeader>
-          <DialogTitle>Pratinjau Disposisi</DialogTitle>
+          <DialogTitle id="disposition-title">Pratinjau Disposisi</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex justify-end sticky top-0 bg-white z-10 py-2">

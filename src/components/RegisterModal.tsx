@@ -98,9 +98,9 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px]" aria-labelledby="register-title">
         <DialogHeader>
-          <DialogTitle>Buat Akun Baru</DialogTitle>
+          <DialogTitle id="register-title">Buat Akun Baru</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
           <div className="grid gap-2">

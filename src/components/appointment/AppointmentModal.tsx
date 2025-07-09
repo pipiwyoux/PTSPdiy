@@ -81,9 +81,9 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px]" aria-labelledby="appointment-title">
         <DialogHeader>
-          <DialogTitle className="text-center text-lg font-bold">
+          <DialogTitle id="appointment-title" className="text-center text-lg font-bold">
             JANJI TEMU DENGAN KEPALA KANTOR, KASUBAG TU, DAN KEPALA SEKSI/ KASI
           </DialogTitle>
           <DialogDescription className="text-center text-sm">

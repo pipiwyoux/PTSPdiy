@@ -95,9 +95,9 @@ const LoginModal = ({ isOpen, onClose, type }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" aria-labelledby="login-title">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle id="login-title">
             Login {type === "pemohon" ? "Pemohon" : "Petugas"}
           </DialogTitle>
         </DialogHeader>

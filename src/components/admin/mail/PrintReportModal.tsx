@@ -79,9 +79,9 @@ const PrintReportModal = ({ isOpen, onClose, entries }: PrintReportModalProps) =
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" aria-labelledby="print-report-title">
         <DialogHeader>
-          <DialogTitle className="text-center text-lg font-bold">
+          <DialogTitle id="print-report-title" className="text-center text-lg font-bold">
             Cetak Laporan Surat Keluar
           </DialogTitle>
           <DialogDescription className="text-center text-sm">

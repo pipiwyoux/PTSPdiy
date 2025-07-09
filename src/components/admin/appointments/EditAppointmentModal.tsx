@@ -69,9 +69,9 @@ const EditAppointmentModal = ({ isOpen, onClose, appointment }: EditAppointmentM
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px]" aria-labelledby="edit-appointment-title">
         <DialogHeader>
-          <DialogTitle className="text-center text-lg font-bold">
+          <DialogTitle id="edit-appointment-title" className="text-center text-lg font-bold">
             Edit Janji Temu
           </DialogTitle>
           <DialogDescription className="text-center text-sm">

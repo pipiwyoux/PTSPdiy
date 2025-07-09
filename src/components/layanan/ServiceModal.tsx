@@ -171,9 +171,9 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-white mx-4">
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-white mx-4" aria-labelledby="service-title">
           <DialogHeader>
-            <DialogTitle className="text-lg sm:text-xl font-bold text-primary pr-6">
+            <DialogTitle id="service-title" className="text-lg sm:text-xl font-bold text-primary pr-6">
               {service.name}
             </DialogTitle>
             <DialogDescription className="text-sm">
