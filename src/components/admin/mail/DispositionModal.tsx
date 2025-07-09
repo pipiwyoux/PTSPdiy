@@ -1,6 +1,8 @@
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { IncomingMail } from "@/types/admin";
@@ -28,6 +30,9 @@ const DispositionModal = ({ isOpen, onClose, mail }: DispositionModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Pratinjau Disposisi</DialogTitle>
+        </DialogHeader>
         <div className="space-y-4">
           <div className="flex justify-end sticky top-0 bg-white z-10 py-2">
             <Button onClick={handlePrint}>
