@@ -57,18 +57,22 @@ const MobileMenu = ({
   const handleMenuItemClick = () => {
     setIsSheetOpen(false);
   };
-  return (
-    <div className="md:hidden">
-      <Sheet>
+
   const handleRegisterClickWithClose = () => {
     setIsRegisterOpen(true);
     setIsSheetOpen(false);
   };
-        <SheetTrigger asChild>
-          <Button
-            variant="ghost"
+
+  const handleLoginClickWithClose = (type: "pemohon" | "petugas") => {
+    handleLoginClick(type);
+    setIsSheetOpen(false);
+  };
+
+  return (
+    <div className="md:hidden">
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          >
+        <SheetTrigger asChild>
+          <Button variant="ghost">
             <Menu className="h-6 w-6" />
             <span className="sr-only">Toggle Menu</span>
           </Button>
@@ -81,31 +85,31 @@ const MobileMenu = ({
                   key={item.name}
                   to={item.path}
                   className="text-base font-medium transition-colors hover:text-primary"
-                  onClick={toggleMenu}
+                  onClick={handleMenuItemClick}
                 >
                   {item.name}
                 </Link>
-                  onClick={handleMenuItemClick}
+              ))}
               {isLoggedIn && (
                 <>
                   {isAdmin ? (
                     <Link
                       to="/admin"
                       className="flex items-center text-secondary hover:text-secondary/80 text-base font-medium"
-                      onClick={toggleMenu}
+                      onClick={handleMenuItemClick}
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       Dashboard
-                      onClick={handleMenuItemClick}
+                    </Link>
                   ) : (
                     <Link
                       to="/permohonan"
                       className="flex items-center text-secondary hover:text-secondary/80 text-base font-medium"
-                      onClick={toggleMenu}
+                      onClick={handleMenuItemClick}
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       Permohonan Anda
-                      onClick={handleMenuItemClick}
+                    </Link>
                   )}
                 </>
               )}
@@ -117,22 +121,22 @@ const MobileMenu = ({
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
-                    onClick={toggleMenu}
+                    onClick={handleMenuItemClick}
                     asChild
                   >
                     <Link to="/profile" className="flex items-center">
-                    onClick={handleMenuItemClick}
+                      <User className="w-4 h-4 mr-2" />
                       Profil
                     </Link>
                   </Button>
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
-                    onClick={toggleMenu}
+                    onClick={handleMenuItemClick}
                     asChild
                   >
                     <Link to="/skm" className="flex items-center">
-                    onClick={handleMenuItemClick}
+                      <FileText className="w-4 h-4 mr-2" />
                       Isi Survey
                     </Link>
                   </Button>
@@ -150,30 +154,27 @@ const MobileMenu = ({
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
-                    onClick={() => {
-                      setIsRegisterOpen(true);
-                      toggleMenu();
-                    }}
+                    onClick={handleRegisterClickWithClose}
                   >
-                      handleRegisterClickWithClose();
+                    <User className="w-4 h-4 mr-2" />
+                    Daftar
+                  </Button>
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
-                    onClick={() => {
-                      handleLoginClick("pemohon");
-                      toggleMenu();
-                    }}
+                    onClick={() => handleLoginClickWithClose("pemohon")}
                   >
-                      handleLoginClickWithClose("pemohon");
+                    <User className="w-4 h-4 mr-2" />
+                    Login Pemohon
+                  </Button>
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
-                    onClick={() => {
-                      handleLoginClick("petugas");
-                      toggleMenu();
-                    }}
+                    onClick={() => handleLoginClickWithClose("petugas")}
                   >
-                      handleLoginClickWithClose("petugas");
+                    <User className="w-4 h-4 mr-2" />
+                    Login Petugas
+                  </Button>
                 </>
               )}
             </div>
@@ -184,8 +185,4 @@ const MobileMenu = ({
   );
 };
 
-  const handleLoginClickWithClose = (type: "pemohon" | "petugas") => {
-    handleLoginClick(type);
-    setIsSheetOpen(false);
-  };
 export default MobileMenu;
