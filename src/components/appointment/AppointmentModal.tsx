@@ -81,30 +81,34 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[525px]" aria-labelledby="appointment-title">
+      <DialogContent 
+        className="w-[95vw] max-w-[525px] max-h-[90vh] overflow-y-auto mx-4 p-4 sm:p-6" 
+        aria-labelledby="appointment-title"
+      >
         <DialogHeader>
-          <DialogTitle id="appointment-title" className="text-center text-lg font-bold">
+          <DialogTitle id="appointment-title" className="text-center text-base sm:text-lg font-bold leading-tight">
             JANJI TEMU DENGAN KEPALA KANTOR, KASUBAG TU, DAN KEPALA SEKSI/ KASI
           </DialogTitle>
-          <DialogDescription className="text-center text-sm">
+          <DialogDescription className="text-center text-xs sm:text-sm mt-2">
             Silakan isi formulir di bawah ini untuk membuat janji temu.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="date">Tanggal Rencana</Label>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-3 sm:gap-4 py-2 sm:py-4">
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="date" className="text-sm font-medium">Tanggal Rencana</Label>
             <Input
               id="date"
               type="date"
+              className="h-10 sm:h-10 text-sm"
               defaultValue={format(new Date(), "yyyy-MM-dd")}
               {...register("date")}
               required
             />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="time">Jam</Label>
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="time" className="text-sm font-medium">Jam</Label>
             <Select onValueChange={(value) => setValue("time", value)} required>
-              <SelectTrigger>
+              <SelectTrigger className="h-10 sm:h-10 text-sm">
                 <SelectValue placeholder="Pilih jam" />
               </SelectTrigger>
               <SelectContent>
@@ -116,22 +120,42 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="name">Nama Tamu</Label>
-            <Input id="name" {...register("name")} required />
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="name" className="text-sm font-medium">Nama Tamu</Label>
+            <Input 
+              id="name" 
+              className="h-10 sm:h-10 text-sm" 
+              placeholder="Masukkan nama lengkap"
+              {...register("name")} 
+              required 
+            />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" {...register("email")} required />
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+            <Input 
+              id="email" 
+              type="email" 
+              className="h-10 sm:h-10 text-sm" 
+              placeholder="contoh@email.com"
+              {...register("email")} 
+              required 
+            />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="whatsapp">No WhatsApp</Label>
-            <Input id="whatsapp" type="tel" {...register("whatsapp")} required />
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="whatsapp" className="text-sm font-medium">No WhatsApp</Label>
+            <Input 
+              id="whatsapp" 
+              type="tel" 
+              className="h-10 sm:h-10 text-sm" 
+              placeholder="08xxxxxxxxxx"
+              {...register("whatsapp")} 
+              required 
+            />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="institution">Instansi</Label>
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="institution" className="text-sm font-medium">Instansi</Label>
             <Select onValueChange={(value) => setValue("institution", value)} required>
-              <SelectTrigger>
+              <SelectTrigger className="h-10 sm:h-10 text-sm">
                 <SelectValue placeholder="Pilih instansi" />
               </SelectTrigger>
               <SelectContent>
@@ -141,10 +165,10 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="meetWith">Ingin Bertemu</Label>
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="meetWith" className="text-sm font-medium">Ingin Bertemu</Label>
             <Select onValueChange={(value) => setValue("meetWith", value)} required>
-              <SelectTrigger>
+              <SelectTrigger className="h-10 sm:h-10 text-sm">
                 <SelectValue placeholder="Pilih pejabat" />
               </SelectTrigger>
               <SelectContent>
@@ -154,11 +178,21 @@ const AppointmentModal = ({ isOpen, onClose }: AppointmentModalProps) => {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="purpose">Keperluan</Label>
-            <Textarea id="purpose" {...register("purpose")} required />
+          <div className="grid gap-1.5 sm:gap-2">
+            <Label htmlFor="purpose" className="text-sm font-medium">Keperluan</Label>
+            <Textarea 
+              id="purpose" 
+              className="min-h-[80px] text-sm resize-none" 
+              placeholder="Jelaskan keperluan Anda..."
+              {...register("purpose")} 
+              required 
+            />
           </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button 
+            type="submit" 
+            className="w-full h-10 sm:h-10 text-sm font-medium mt-2" 
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Loading..." : "SIMPAN"}
           </Button>
         </form>
