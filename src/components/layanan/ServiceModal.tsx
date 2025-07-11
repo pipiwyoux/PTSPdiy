@@ -174,7 +174,7 @@ const ServiceModal = ({ isOpen, onClose, service }: ServiceModalProps) => {
         <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-white mx-4">
           <DialogHeader>
             <DialogTitle className="text-lg sm:text-xl font-bold text-primary pr-6">
-              {service.name}
+              {service.name || "Detail Layanan"}
             </DialogTitle>
             <DialogDescription className="text-sm">
               {auth.currentUser
