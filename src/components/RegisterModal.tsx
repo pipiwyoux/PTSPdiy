@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -98,9 +99,12 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[525px]" aria-labelledby="register-title">
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle id="register-title">Buat Akun Baru</DialogTitle>
+          <DialogTitle>Buat Akun Baru</DialogTitle>
+          <DialogDescription>
+            Isi formulir di bawah ini untuk mendaftarkan akun baru.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
           <div className="grid gap-2">

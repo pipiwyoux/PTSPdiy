@@ -82,7 +82,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "phu",
-    title: "4. Seksi Penyelenggara Haji dan Umrah (PHU)",
+    title: "3. Seksi Penyelenggara Haji dan Umrah (PHU)",
     services: [
       {
         name: "Pelimpahan Nomor Porsi Haji (Karena Meninggal Dunia dan Karena Sakit Permanen)",
@@ -106,7 +106,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "bimas",
-    title: "5. Seksi Bimbingan Masyarakat Islam (BIMAS)",
+    title: "4. Seksi Bimbingan Masyarakat Islam (BIMAS)",
     services: [
       {
         name: "Penerbitan Surat Keterangan Terdaftar (SKT) Majelis Taklim",
@@ -178,7 +178,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "pais",
-    title: "6. Seksi Pendidikan Agama Islam (PAIS)",
+    title: "5. Seksi Pendidikan Agama Islam (PAIS)",
     services: [
       {
         name: "Pemberkasan Pengawas PAI",
@@ -208,7 +208,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "dikmad",
-    title: "7. Seksi Pendidikan Madrasah (DIKMAD)",
+    title: "6. Seksi Pendidikan Madrasah (DIKMAD)",
     services: [
       {
         name: "Pemberkasan Tunjangan Profesi Guru Madrasah",
@@ -256,7 +256,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "tata-usaha",
-    title: "8. Sub Bagian Tata Usaha - Kehumasan",
+    title: "7. Sub Bagian Tata Usaha - Kehumasan",
     services: [
       {
         name: "Permohonan Rekomendasi Izin Kegiatan Keagamaan",
