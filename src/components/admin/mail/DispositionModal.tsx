@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -29,9 +30,12 @@ const DispositionModal = ({ isOpen, onClose, mail }: DispositionModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" aria-labelledby="disposition-title">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle id="disposition-title">Pratinjau Disposisi</DialogTitle>
+          <DialogTitle>Pratinjau Disposisi</DialogTitle>
+          <DialogDescription>
+            Ini adalah pratinjau dari lembar disposisi yang akan dicetak.
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex justify-end sticky top-0 bg-white z-10 py-2">
