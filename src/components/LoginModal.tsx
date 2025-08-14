@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -95,11 +96,14 @@ const LoginModal = ({ isOpen, onClose, type }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]" aria-labelledby="login-title">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle id="login-title">
+          <DialogTitle>
             Login {type === "pemohon" ? "Pemohon" : "Petugas"}
           </DialogTitle>
+          <DialogDescription>
+            Masukkan email dan password Anda untuk masuk.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
           <div className="grid gap-2">
