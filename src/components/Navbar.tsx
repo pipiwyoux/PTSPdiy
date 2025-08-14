@@ -6,16 +6,13 @@ import DesktopMenu from "./navbar/DesktopMenu";
 import MobileMenu from "./navbar/MobileMenu";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [loginType, setLoginType] = useState<"pemohon" | "petugas" | null>(null);
+  const [loginType, setLoginType] = useState<"pemohon" | "petugas" | null>(
+    null
+  );
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleLoginClick = (type: "pemohon" | "petugas") => {
     setLoginType(type);
-    setIsLoginOpen(false);
   };
 
   return (
@@ -33,15 +30,11 @@ const Navbar = () => {
           </div>
 
           <DesktopMenu
-            isLoginOpen={isLoginOpen}
-            setIsLoginOpen={setIsLoginOpen}
             handleLoginClick={handleLoginClick}
             setIsRegisterOpen={setIsRegisterOpen}
           />
 
           <MobileMenu
-            isOpen={isOpen}
-            toggleMenu={toggleMenu}
             handleLoginClick={handleLoginClick}
             setIsRegisterOpen={setIsRegisterOpen}
           />

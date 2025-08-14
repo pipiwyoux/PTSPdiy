@@ -1,44 +1,29 @@
 import { Link } from "react-router-dom";
-import { Menu, FileText, User, LogOut } from "lucide-react";
+import { Menu, FileText, User, LogOut, UserPlus, LogIn } from "lucide-react";
 import { MenuItems } from "./MenuItems";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { auth } from "@/lib/firebase";
+import { useState } from "react";
 
 interface MobileMenuProps {
-  isOpen: boolean;
-  toggleMenu: () => void;
   handleLoginClick: (type: "pemohon" | "petugas") => void;
   setIsRegisterOpen: (value: boolean) => void;
 }
 
 const MobileMenu = ({
-  isOpen,
-  toggleMenu,
   handleLoginClick,
   setIsRegisterOpen,
 }: MobileMenuProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { user, isLoggedIn, isAdmin, loading } = useAuth();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsLoggedIn(!!user);
-      if (user?.email) {
-        setIsAdmin(user.email === "admin@tolopani.net");
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleLogout = async () => {
     try {
@@ -118,6 +103,15 @@ const MobileMenu = ({
             <div className="flex flex-col space-y-2">
               {isLoggedIn ? (
                 <>
+                  <div className="px-2 py-2">
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      Signed in as
+                    </p>
+                    <p className="text-sm text-gray-500 truncate">
+                      {user?.email}
+                    </p>
+                  </div>
+                  <Separator />
                   <Button
                     variant="ghost"
                     className="justify-start px-2"
@@ -156,7 +150,7 @@ const MobileMenu = ({
                     className="justify-start px-2"
                     onClick={handleRegisterClickWithClose}
                   >
-                    <User className="w-4 h-4 mr-2" />
+                    <UserPlus className="w-4 h-4 mr-2" />
                     Daftar
                   </Button>
                   <Button
@@ -164,7 +158,7 @@ const MobileMenu = ({
                     className="justify-start px-2"
                     onClick={() => handleLoginClickWithClose("pemohon")}
                   >
-                    <User className="w-4 h-4 mr-2" />
+                    <LogIn className="w-4 h-4 mr-2" />
                     Login Pemohon
                   </Button>
                   <Button
@@ -172,7 +166,7 @@ const MobileMenu = ({
                     className="justify-start px-2"
                     onClick={() => handleLoginClickWithClose("petugas")}
                   >
-                    <User className="w-4 h-4 mr-2" />
+                    <LogIn className="w-4 h-4 mr-2" />
                     Login Petugas
                   </Button>
                 </>

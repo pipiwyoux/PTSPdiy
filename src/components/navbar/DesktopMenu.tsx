@@ -7,42 +7,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { auth } from "@/lib/firebase";
 
 interface DesktopMenuProps {
-  isLoginOpen: boolean;
-  setIsLoginOpen: (value: boolean) => void;
   handleLoginClick: (type: "pemohon" | "petugas") => void;
   setIsRegisterOpen: (value: boolean) => void;
 }
 
 const DesktopMenu = ({
-  isLoginOpen,
-  setIsLoginOpen,
   handleLoginClick,
   setIsRegisterOpen,
 }: DesktopMenuProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { user, isLoggedIn, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      setIsLoggedIn(!!user);
-      if (user?.email) {
-        setUserName(user.email);
-        setIsAdmin(user.email === "admin@tolopani.net");
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleLogout = async () => {
     try {
@@ -93,9 +75,9 @@ const DesktopMenu = ({
 
       {isLoggedIn ? (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors max-w-[200px]">
+          <DropdownMenuTrigger className="flex items-center bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
             <User className="w-4 h-4 mr-1 lg:mr-2 flex-shrink-0" />
-            <span className="truncate hidden sm:inline max-w-[120px]">{userName}</span>
+            <span className="truncate hidden sm:inline">{user?.email}</span>
             <ChevronDown className="ml-1 h-4 w-4 flex-shrink-0" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -111,7 +93,7 @@ const DesktopMenu = ({
                 Isi Survey
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               className="flex items-center text-red-600"
               onClick={handleLogout}
             >
@@ -128,32 +110,19 @@ const DesktopMenu = ({
           >
             Buat Akun
           </button>
-          <div className="relative">
-            <button
-              onClick={() => setIsLoginOpen(!isLoginOpen)}
-              className="bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors flex items-center whitespace-nowrap"
-            >
+          <DropdownMenu>
+            <DropdownMenuTrigger className="bg-primary text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition-colors flex items-center whitespace-nowrap">
               Login <ChevronDown className="ml-1 h-4 w-4" />
-            </button>
-            {isLoginOpen && (
-              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                <div className="py-1">
-                  <button
-                    onClick={() => handleLoginClick("pemohon")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Login Pemohon
-                  </button>
-                  <button
-                    onClick={() => handleLoginClick("petugas")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Login Petugas
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={() => handleLoginClick("pemohon")}>
+                Login Pemohon
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleLoginClick("petugas")}>
+                Login Petugas
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       )}
     </div>
